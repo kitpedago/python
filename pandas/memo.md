@@ -30,6 +30,7 @@ type(df) # pandas.core.frame.DataFrame
 type(df.email) # pandas.core.series.Series
 df.loc[10:20]  # affiche de la ligne 10 à 20 icnluses
 df_email.loc[["bwymanb@lulu.com", "omaryone@va.gov"]]
+df.dtypes # affiche le type de chaque colonne
 ```
 
 ## Index
@@ -72,5 +73,33 @@ df.isnull() # affiche les lignes avec au moins une valeur NaN
 df.notnull() # inverse
 df[df["Champ1"].notnull()].head() # 5 premières lignes donc Champs1 est pas NaN
 df.tax.fillna(method='bfill') # Remplit les NaN par des valeurs autour
+df.tax.fillna(0, inplace=True) # Remplit les NaN par 0
 df.dropna(subset=["Champ1"], inplace=True) # Supprime les lignes dont Champ1 est NaN
+```
+
+## Mapping
+
+```python
+countries = {"United States": "UN", "France": "FR", "Canada": "CA", "Morocco": "MA"} # Création du dictionnaire
+df["country_code"]=  df.country.map(countries) # application du dictionnaire
+
+```
+
+## Analyse
+
+```Python
+df.describe() # infos résumées des colonnes
+df.price_paid.describe() # infos résumées de la colonne
+df.price_paid.mean() # Moyenne
+df.country.unique().tolist() # Occurence, en liste [ et ]
+df.country.value_counts(normalize=True) # comptage des lignes, en %
+df.groupby(["Champ1", "Champ2"]).sum() # somme par Champ1 puis Champ2 (TCD)
+```
+
+## Graphiques
+
+```Python
+df.groupby("date")["price_paid"].sum().plot(figsize=[20,10]) # Courbe avec taille ajustée
+df.groupby("gender")["price_paid"].sum().plot.pie(legend=True, figsize=[7,7]) # Graphique avec légende
+df.groupby("date")["price_paid"].sum().plot.bar(rot=90, legend=True, figsize=[20,10]) # Histogramme avec légende 90°
 ```
