@@ -6,14 +6,11 @@ C:\users\<user>\datascience
 
 Py -3.9 -m jupyterlab
 
-<<<<<<< HEAD
-
 ## Install
 
 ```python
 import pandas as pd
 df = pd.read_csv("data.csv")
-
 ```
 
 ## Affichage
