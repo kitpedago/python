@@ -28,9 +28,13 @@ df.shape # affiche nb lignes et nb colonnes
 df.columns.tolist() # affiche les champs
 type(df) # pandas.core.frame.DataFrame
 type(df.email) # pandas.core.series.Series
-df.loc[10:20]  # affiche de la ligne 10 à 20 icnluses
-df_email.loc[["bwymanb@lulu.com", "omaryone@va.gov"]]
+df.loc[10:20]  # affiche de la ligne 10 à 20 icnluses. Nom : slice. Loc faccultatif
+df_email.loc[["email1@test.com", "test@email.com"]]
 df.dtypes # affiche le type de chaque colonne
+dir(objet) # affiche toutes les actions possibles sur l'objet
+df.country.value_counts()[:3].to_dict() # Affiche en dictionnaire les 3 premiers pays par nb de lignes
+df.release_year.value_counts()[:10].sort_index(ascending=False) # Affiche le nombre de lignes par années, triées par année décroissant
+df.director.dropna().unique().tolist()[:10] # Affiche les 10 premieres réalisateur, sans
 ```
 
 ## Index
@@ -55,13 +59,13 @@ df[df.country.isin(["France", "Canada"])]
 ```python
 df_test = df.copy() # on copie le df
 df_test[df_test.price_paid.apply(lambda x: x.replace("$", "")).astype(float) >= 5] # on filtre si price_paid > 5, en enlevant $
+df["duration_num"] = df.duration.str.replace(" min", "").map(int) # On ajoute une colonne en remplaçant min par rien, puis en convertissant en entier
 ```
 
 ## Suppressions
 
 ```python
 df.drop("ip_address", axis=1, inplace=True) # Supprime la colonne (Axe 1)
-
 df.set_index("gender", inplace=True) # On commence par attribuer l'index
 df.drop("Male", axis=0, inplace=True) # On supprime les lignes (Axe 0) selon valeur de l'index
 ```
